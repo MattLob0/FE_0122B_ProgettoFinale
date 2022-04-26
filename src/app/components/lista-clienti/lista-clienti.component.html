@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="container-xl justify-content-center mt-3">
+  <table class="table">
+    <thead>
+      <tr class="table bg-dark text-white">
+        <th scope="col">ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">partitaIva</th>
+        <th scope="col">ragione Sociale</th>
+        <th><a routerLink="/dettaglio-cliente" class="btn btn-success">Nuovo</a></th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody  class="table-dark">
+      <tr *ngFor="let client of cliente, let i = index">
+        <td>{{client.id}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.partitaIva}}</td>
+        <td>{{client.ragioneSociale}}</td>
+        <td><a [routerLink]="['/fatture/cliente', client.id]" class="btn btn-info">Fatture</a></td>
+        <td><a (click)="$event.preventDefault();Delete(client.ragioneSociale, client.id, i)"
+            class="btn btn-danger">Elimina</a></td>
+            <td><a [routerLink]="['/dettaglio-cliente', cliente,id]" class="btn btn-warning">Modifica</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <tfoot>
+    <tr>
+      <td colspan="8">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination" *ngIf="response">
+            <li class="page-item" *ngIf="!response.first"><a class="page-link"
+                (click)="$event.preventDefault();pagine(response.number-1)" href="#">Previous</a></li>
+            <li class="page-item" *ngIf="!response.last"><a class="page-link"
+                (click)="$event.preventDefault();pagine(response.number+1)" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </td>
+    </tr>
+  </tfoot>
+</div>
+

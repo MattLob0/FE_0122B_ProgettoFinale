@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container-xl justify-content-center mt-3">
+  <table class="table">
+  <thead>
+    <tr class="table bg-dark text-white">
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Roles</th>
+    </tr>
+  </thead>
+
+  <tbody class="table-dark">
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <span *ngFor="let item of user.roles">{{item.roleName}}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<tfoot>
+  <tr>
+    <td colspan="8">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" *ngIf="response">
+                <li class="page-item" *ngIf="!response.first"><a class="page-link"
+                        (click)="$event.preventDefault();pagine(response.number-1)"
+                        href="#">Previous</a></li>
+                <li class="page-item" *ngFor="let p of contatotre(response.totalPages); index as i"
+                    [ngClass]="(i == response.number) ? 'active' : ''">
+                    <a class="page-link" (click)="$event.preventDefault();pagine(i)"
+                        href="#">{{ i+1 }}</a>
+                </li>
+                <li class="page-item" *ngIf="!response.last"><a class="page-link"
+                        (click)="$event.preventDefault();pagine(response.number+1)"
+                        href="#">Next</a></li>
+            </ul>
+        </nav>
+    </td>
+</tr>
+</tfoot>
+</div>
